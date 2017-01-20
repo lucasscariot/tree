@@ -7,4 +7,5 @@ env:
 matrix:
   fast_finish: true
 script:
+    - npm run lint
     - npm run test
