@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node",
-    "test": "jest"
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",
@@ -38,8 +40,14 @@
     "express": "^4.14.0",
     "forest-express-mongoose": "^0.3.3",
     "jest": "^18.1.0",
+    "jest-cli": "^18.1.0",
     "mongoose": "^4.7.7",
     "multer": "^1.2.1",
     "nodemon": "^1.11.0"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    }
   }
 }

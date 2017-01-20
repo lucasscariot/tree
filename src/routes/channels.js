@@ -1,6 +1,9 @@
-import { router } from '../app'
+/**
+ * @flow
+ */
+ import { router } from '../app'
 
-router.route('/channels')
+ router.route('/channels')
   .get((req, res) => { res.json({ routes: 'channels' }) })
 
-export default router
+ export default router
