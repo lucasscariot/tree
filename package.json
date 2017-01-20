@@ -4,6 +4,9 @@
   "description": "Chat Online",
   "main": "index.js",
   "scripts": {
+    "build:re": "babel-node ./node_modules/.bin/webpack",
+    "build": "babel-node ./node_modules/.bin/webpack",
+    "clean": "rm -rf ./build",
     "start": "nodemon src/index.js --exec babel-node",
     "test": "jest",
     "test:cov": "jest --coverage",
@@ -42,9 +45,11 @@
     "forest-express-mongoose": "^0.3.3",
     "jest": "^18.1.0",
     "jest-cli": "^18.1.0",
+    "json-loader": "^0.5.4",
     "mongoose": "^4.7.7",
     "multer": "^1.2.1",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "webpack": "^1.14.0"
   },
   "jest": {
     "transform": {
