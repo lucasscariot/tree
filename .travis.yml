@@ -6,7 +6,5 @@ env:
     - EMBER_VERSION=dev
 matrix:
   fast_finish: true
-install:
-    - yarn
 script:
     - npm run test
