@@ -4,10 +4,8 @@ node_js:
   - "6"
   - "6.1"
   - "5.11"
-  - "0.6"
-  - "iojs"
 env:
-    - EMBER_VERSION=dev
+    - NODE_ENV=dev
 matrix:
   fast_finish: true
 script:

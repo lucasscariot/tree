@@ -7,6 +7,7 @@
     "start": "nodemon src/index.js --exec babel-node",
     "test": "jest",
     "test:cov": "jest --coverage",
+    "test:watch": "jest --watch",
     "lint": "eslint ./src"
   },
   "repository": {
