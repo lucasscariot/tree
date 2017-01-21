@@ -1,11 +1,13 @@
 /**
  * @flow
  */
- import mongoose from 'mongoose'
+import mongoose from 'mongoose'
 
-export default const channelsSchema = new mongoose.Schema({
+const channelSchema = new mongoose.Schema({
   name: String,
-  city: String,
-  creator: mongoose.Schema.Types.ObjectId,
-  ip: String,
+  password: String,
 }, { timestamps: true })
+
+const Channel = mongoose.model('Channel', channelSchema)
+
+export default Channel
