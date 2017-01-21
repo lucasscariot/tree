@@ -1,4 +1,4 @@
-z/**
+/**
  * @flow
  */
 import crypto from 'crypto-js/sha256'
