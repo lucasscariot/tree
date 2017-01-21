@@ -16,9 +16,6 @@
 
     function login() {
       vm.dataLoading = true
-
-      console.log(vm)
-
       const req = {
         method: 'POST',
         url: 'http://localhost:3000/users/login',
@@ -32,9 +29,11 @@
       }
 
       $http(req).then((response) => {
+        console.log(response.data)
         if (response.status === 200) {
           FlashService.Success('Login successful', true)
-          vm.dataLoading = false
+          AuthenticationService.SetCredentials(response.data.treeName, response.data.email, response.data._id)
+          $location.path('/')
         } else {
           FlashService.Error(response.message)
           vm.dataLoading = false

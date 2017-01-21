@@ -1,45 +1,45 @@
-﻿(function () {
-    'use strict';
-
-    angular
+(function () {
+  angular
         .module('app')
-        .controller('HomeController', HomeController);
+        .controller('HomeController', HomeController)
 
-    HomeController.$inject = ['UserService', '$rootScope'];
-    function HomeController(UserService, $rootScope) {
-        var vm = this;
+  HomeController.$inject = ['UserService', '$rootScope', '$http']
+  function HomeController(UserService, $rootScope, $http) {
+    const vm = this
 
-        vm.user = null;
-        vm.allUsers = [];
-        vm.deleteUser = deleteUser;
+    vm.user = null
+    vm.allUsers = []
 
-        initController();
+    initController()
 
-        function initController() {
-            loadCurrentUser();
-            loadAllUsers();
-        }
-
-        function loadCurrentUser() {
-            UserService.GetByUsername($rootScope.globals.currentUser.username)
-                .then(function (user) {
-                    vm.user = user;
-                });
-        }
-
-        function loadAllUsers() {
-            UserService.GetAll()
-                .then(function (users) {
-                    vm.allUsers = users;
-                });
-        }
-
-        function deleteUser(id) {
-            UserService.Delete(id)
-            .then(function () {
-                loadAllUsers();
-            });
-        }
+    function initController() {
+      // loadCurrentUser()
+      loadAllChannels()
     }
 
-})();
+    // function loadCurrentUser() {
+    //   UserService.GetByUsername($rootScope.globals.currentUser.username)
+    //     .then((user) => {
+    //       console.log($rootScope.globals.currentUser)
+    //       vm.user = user
+    //     })
+    // }
+
+    function loadAllChannels() {
+      const req = {
+        method: 'GET',
+        url: 'http://localhost:3000/channels',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+      $http(req).then((response) => {
+        if (response.status === 200) {
+          vm.channels = response.data
+        } else {
+          vm.channels = []
+        }
+      })
+    }
+  }
+}())
