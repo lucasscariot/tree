@@ -11,7 +11,8 @@
     "test": "jest",
     "test:cov": "jest --coverage",
     "test:watch": "jest --watch",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -44,6 +45,8 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "express": "^4.14.0",
+    "flow-bin": "^0.38.0",
+    "flow-runtime": "^0.2.1",
     "forest-express-mongoose": "^0.3.3",
     "jest": "^18.1.0",
     "jest-cli": "^18.1.0",
