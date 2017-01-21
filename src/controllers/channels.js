@@ -1,40 +1,38 @@
 /**
  * @flow
  */
-import Channel from '../schemas/channels'
+import Channels from '../schemas/channels'
 import Users from '../schemas/users'
 import { mongoose } from '../app'
 
 export const getChannels = (req, res) => {
-  Channel
+  Channels
     .find()
-    .populate('creator', 'firstName')
-    .then((data) => { res.status(200).json(data) })
+    .populate('creator', 'treeName')
+    .then((channel) => { res.status(200).json(channel) })
     .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
 }
 
 export const getChannel = (req, res) => {
-  Channel
-    .findOne({ _id: mongoose.Types.ObjectId(req.body.creator) })
-    .populate('creator')
-    .then((data) => {
-      res.status(200).json(data)
-    })
-    .catch((err) => {
-      res.status(400).json({ error: true, message: err.toString() })
-    })
+  Channels
+    .findOne({ _id: mongoose.Types.ObjectId(req.params.channelId) })
+    .populate('creator', 'treeName')
+    .then((channel) => { res.status(200).json(channel) })
+    .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
 }
 
 export const putChannel = (req, res) => {
-  Channel
-    .findOne({ _id: mongoose.Types.ObjectId(req.body.creator) })
-    .populate('creator')
-    .then((data) => {
-      res.status(200).json(data)
+  Channels
+    .findOne({ _id: req.params.channelId }).exec()
+    .then((channel) => {
+      const updatedChannel = channel
+      if (req.body.name) { updatedChannel.name = req.body.name }
+      if (req.body.description) { updatedChannel.description = req.body.description }
+      if (req.body.password) { updatedChannel.password = crypto(req.body.password) }
+      return updatedChannel.save()
     })
-    .catch((err) => {
-      res.status(400).json({ error: true, message: err.toString() })
-    })
+    .then((user) => { res.status(200).json(user) })
+    .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
 }
 
 export const postChannel = (req, res) => {
@@ -42,7 +40,7 @@ export const postChannel = (req, res) => {
     .findOne({ _id: req.body.creator })
     .then((user) => {
       if (!user) { throw new Error('User not found') } else {
-        const newChannel = new Channel()
+        const newChannel = new Channels()
 
         newChannel.name = req.body.name
         newChannel.description = req.body.description
@@ -50,9 +48,16 @@ export const postChannel = (req, res) => {
         newChannel.creator = mongoose.Types.ObjectId(req.body.creator)
 
         newChannel
-          .save().then((data) => { res.status(201).json(data) })
+          .save().then((channel) => { res.status(201).json(channel) })
           .catch((err) => { throw new Error(err) })
       }
     })
     .catch((error) => { res.status(400).json({ error: true, message: error.toString() }); return false })
+}
+
+export const delChannel = (req, res) => {
+  Channels
+    .remove({ _id: req.params.channelId })
+    .then(() => { res.status(200).json({ message: 'Channel deleted' }) })
+    .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
 }

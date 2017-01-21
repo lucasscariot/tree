@@ -1,4 +1,4 @@
-/**
+z/**
  * @flow
  */
 import crypto from 'crypto-js/sha256'
@@ -16,7 +16,8 @@ export const getUsers = (req, res) => {
 
 export const getUser = (req, res) => {
   Users
-    .findOne({ _id: req.params.userId }).then((data) => { res.status(200).json(data) })
+    .findOne({ _id: req.params.userId })
+    .then((data) => { res.status(200).json(data) })
     .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
 }
 
@@ -27,7 +28,7 @@ export const putUser = (req, res) => {
       const updatedUser = user
       if (req.body.firstName) { updatedUser.firstName = req.body.firstName }
       if (req.body.lastName) { updatedUser.lastName = req.body.lastName }
-      if (req.body.password) { updatedUser.password = req.body.password }
+      if (req.body.password) { updatedUser.password = crypto(req.body.password) }
       return updatedUser.save()
     })
     .then((user) => { res.status(200).json(user) })
