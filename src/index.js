@@ -8,8 +8,13 @@ import config from './config'
 
 const { MONGO } = config
 
-mongoose.connect(MONGO, (err) => {
-  if (err) { throw Error(err) } else { console.log('Connected to Database') }
+mongoose.connect(MONGO, {
+  server: {
+    socketOptions: {
+      socketTimeoutMS: 0,
+      connectTimeoutMS: 0,
+    },
+  },
 })
 
 app.use('/', channels)

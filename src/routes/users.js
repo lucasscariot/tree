@@ -1,11 +1,15 @@
 /**
  * @flow
  */
- import { router } from '../app'
- import { postUser } from '../controllers/users'
+import { router } from '../app'
+import { postUser, getUsers, getUser, delUser } from '../controllers/users'
 
- router.route('/users')
-   .get((req, res) => { res.json({ route: 'users' }) })
-   .post((req, res) => postUser(req, res))
+router.route('/users')
+ .get((req, res) => getUsers(req, res))
+ .post((req, res) => postUser(req, res))
 
- export default router
+router.route('/users/:userId')
+ .get((req, res) => getUser(req, res))
+ .delete((req, res) => delUser(req, res))
+
+export default router
