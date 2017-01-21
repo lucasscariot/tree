@@ -21,6 +21,15 @@ export const getUser = (req, res) => {
     .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
 }
 
+export const loginUser = (req, res) => {
+  const hashedPass = crypto(req.body.password).toString()
+  Users
+    .findOne({ email: req.body.email, password: hashedPass })
+    .then((data) => { if (data) { res.status(200).json(data) } else { throw new Error('User not found') } })
+    .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
+}
+
+
 export const putUser = (req, res) => {
   Users
     .findOne({ _id: req.params.userId }).exec()
@@ -39,18 +48,19 @@ export const postUser = (req, res) => {
   if (!req.body.firstName || !req.body.lastName ||
       !req.body.email || !req.body.password) {
     res.status(400).json({ error: true, message: 'Missing parameters' })
-  }
-  const newUser = new Users()
-  newUser.firstName = req.body.firstName
-  newUser.lastName = req.body.lastName
-  newUser.treeName = TREE_NAMES[Math.floor(Math.random() * TREE_NAMES.length)] + Math.floor(Math.random() * 99)
-  newUser.email = req.body.email
-  newUser.password = crypto(req.body.password)
+  } else {
+    const newUser = new Users()
+    newUser.firstName = req.body.firstName
+    newUser.lastName = req.body.lastName
+    newUser.treeName = TREE_NAMES[Math.floor(Math.random() * TREE_NAMES.length)] + Math.floor(Math.random() * 99)
+    newUser.email = req.body.email
+    newUser.password = crypto(req.body.password)
 
-  newUser
-    .save()
-    .then((data) => { res.status(201).json(data) })
-    .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
+    newUser
+      .save()
+      .then((data) => { res.status(201).json(data) })
+      .catch((err) => { res.status(400).json({ error: true, message: err.toString() }) })
+  }
 }
 
 export const delUser = (req, res) => {
