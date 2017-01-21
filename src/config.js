@@ -4,7 +4,16 @@
 
 // Used by all environments
 const baseConf = {
-
+  TREE_NAMES: [
+    'Maple',
+    'Wisteria',
+    'Oak',
+    'Sequoia',
+    'Eucalyptus',
+    'Jacarandas',
+    'Baobab',
+    'Rhododendron',
+  ],
 }
 
 // Dev & Prod Environment

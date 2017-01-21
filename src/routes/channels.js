@@ -10,6 +10,5 @@
 
  router.route('/channels/:channelId')
    .get((req, res) => getChannel(req, res))
-   .post((req, res) => postChannel(req, res))
 
  export default router
