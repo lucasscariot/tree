@@ -5,6 +5,7 @@ import { Schema, mongoose } from '../app'
 
 const channelsSchema = new Schema({
   name: String,
+  avatar: String,
   description: String,
   password: String,
   creator: { type: Schema.Types.ObjectId, ref: 'Users' },

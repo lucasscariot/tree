@@ -1,0 +1,14 @@
+{{page-header title="Users"}}
+
+{{#each model as |user|}}
+  <div class="media">
+    <div class="media-left">
+        <img class="media-object" src="{{user.avatar}}" width="50px" alt="...">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{user.treeName}}</h4> {{user.firstName}} {{user.lastName}}
+    </div>
+  </div>
+{{/each}}
+
+{{outlet}}

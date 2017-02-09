@@ -6,6 +6,7 @@ import { Schema, mongoose } from '../app'
 const usersSchema = new Schema({
   firstName: String,
   lastName: String,
+  avatar: String,
   treeName: String,
   email: String,
   password: String,

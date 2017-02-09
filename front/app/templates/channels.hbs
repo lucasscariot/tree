@@ -1,0 +1,16 @@
+{{page-header title="Channels"}}
+
+{{#each model as |channel|}}
+  <div class="col-sm-4 col-md-3">
+    <div class="thumbnail">
+      <img src="{{channel.avatar}}" alt="...">
+      <div class="caption">
+        <h3>{{channel.name}}</h3>
+        <p>{{channel.description}}</p>
+        <i>{{channel.creator.treeName}}</i>
+      </div>
+    </div>
+  </div>
+{{/each}}
+
+{{outlet}}
