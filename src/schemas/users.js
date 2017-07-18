@@ -10,6 +10,7 @@ const usersSchema = new Schema({
   treeName: String,
   email: String,
   password: String,
+  pictures: [String],
 }, { timestamps: true })
 
 const Users = mongoose.model('Users', usersSchema)

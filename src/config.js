@@ -18,8 +18,8 @@ const baseConf = {
 
 // Dev & Prod Environment
 const devConf = {
-  FOREST_ENV_SECRET: '99b2cc318043c7e5ca043421d033897db5deb7b457e5bcf18e03b16c6a6afc41',
-  FOREST_AUTH_SECRET: '7aad16d3dd6e545705a67aba490c505e3519c9d439b6a3d37897643c248c0012',
+  FOREST_ENV_SECRET: 'fade15699f05eff37e7911db953f5fb87fe639f149d30e9721c237b0273622eb',
+  FOREST_AUTH_SECRET: 'tJbww6kBsDOMfeI9wxobxnhDxMttkO4F',
   MONGO: 'mongodb://tree:tree@ds117819.mlab.com:17819/dev_tree',
 }
 const prodConf = {
